@@ -15,6 +15,7 @@
         <item
             android:id="@+id/nav_schedules"
             android:icon="@drawable/ic_menu_slideshow"
+            android:titleCondensed="WorkSchedules"
             android:title="Work Schedules" />
         <item
             android:id="@+id/nav_leaves"

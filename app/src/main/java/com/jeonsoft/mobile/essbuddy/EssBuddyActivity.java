@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jeonsoft.mobile.essbuddy.data.context.ProfileContext;
+import com.jeonsoft.mobile.essbuddy.navfragments.MissingPageFragment;
 import com.jeonsoft.mobile.essbuddy.networking.HttpResponse;
 import com.jeonsoft.mobile.essbuddy.utils.AsyncHttpRequest;
 import com.jeonsoft.mobile.essbuddy.utils.AsyncHttpRequestListener;
@@ -141,7 +142,11 @@ public class EssBuddyActivity extends BaseCompatActivity
     }
 
     private void setNavigationContent(MenuItem item) {
-        String name = item.getTitleCondensed().toString();
+        String name = item.getTitleCondensed().toString().trim();
+        if (name.equals("")) {
+            name = item.getTitle().toString().trim();
+        }
+        name = name.replaceAll(" ", "");
         try {
             Class<?> cls = Class.forName(getPackageName().concat(".navfragments.").concat(name.concat("Fragment")));
             Fragment fragment = (Fragment) cls.getConstructor().newInstance();
@@ -150,7 +155,11 @@ public class EssBuddyActivity extends BaseCompatActivity
             ft.replace(R.id.fragment_container, fragment);
             ft.commit();
         } catch (ClassNotFoundException ex) {
-            logE("Cannot find class: " + name.concat("Fragment") + ". " + ex.getMessage());
+            Fragment fragment = new MissingPageFragment();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.fragment_container, fragment);
+            ft.commit();
         } catch (NoSuchMethodException ex) {
             logE("No such method. " + ex.getMessage());
         } catch (Exception ex) {

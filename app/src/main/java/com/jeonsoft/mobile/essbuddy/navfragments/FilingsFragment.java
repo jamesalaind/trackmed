@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by acerpc on 1/1/2016.
  */
-public class FilingsFragment extends BaseTabFragment {
+public class FilingsFragment extends BaseFragment {
     private RecyclerView lvPersonalInfo;
 
     @Nullable
