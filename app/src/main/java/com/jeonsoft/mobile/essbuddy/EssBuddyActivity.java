@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jeonsoft.mobile.essbuddy.data.context.ProfileContext;
+import com.jeonsoft.mobile.essbuddy.navfragments.BaseFragment;
 import com.jeonsoft.mobile.essbuddy.navfragments.MissingPageFragment;
 import com.jeonsoft.mobile.essbuddy.networking.HttpResponse;
 import com.jeonsoft.mobile.essbuddy.utils.AsyncHttpRequest;
@@ -28,6 +29,7 @@ public class EssBuddyActivity extends BaseCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private TextView tvProfileName, tvCompanyName;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class EssBuddyActivity extends BaseCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
@@ -147,15 +149,32 @@ public class EssBuddyActivity extends BaseCompatActivity
             name = item.getTitle().toString().trim();
         }
         name = name.replaceAll(" ", "");
+
         try {
             Class<?> cls = Class.forName(getPackageName().concat(".navfragments.").concat(name.concat("Fragment")));
             Fragment fragment = (Fragment) cls.getConstructor().newInstance();
+            if (fragment instanceof BaseFragment) {
+                if(((BaseFragment) fragment).isShowFloatingActionButton())
+                    fab.show();
+                else
+                    fab.hide();
+            } else {
+                fab.show();
+            }
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragment_container, fragment);
             ft.commit();
         } catch (ClassNotFoundException ex) {
             Fragment fragment = new MissingPageFragment();
+            if (fragment instanceof BaseFragment) {
+                if(((BaseFragment) fragment).isShowFloatingActionButton())
+                    fab.show();
+                else
+                    fab.hide();
+            } else {
+                fab.show();
+            }
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragment_container, fragment);

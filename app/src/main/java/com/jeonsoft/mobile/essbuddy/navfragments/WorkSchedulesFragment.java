@@ -12,6 +12,10 @@ import com.jeonsoft.mobile.essbuddy.R;
  * Created by whizk on 03/02/2016.
  */
 public class WorkSchedulesFragment extends BaseFragment {
+    public WorkSchedulesFragment() {
+        setShowFloatingActionButton(false);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
