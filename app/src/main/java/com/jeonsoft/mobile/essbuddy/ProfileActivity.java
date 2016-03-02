@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 
-import com.jeonsoft.mobile.essbuddy.data.ProfileManager;
+import com.jeonsoft.mobile.essbuddy.data.context.ProfileContext;
 import com.jeonsoft.mobile.essbuddy.navfragments.FilingsFragment;
 import com.jeonsoft.mobile.essbuddy.navfragments.ProfileFragment;
 import com.jeonsoft.mobile.essbuddy.navfragments.SubordinatesFragment;
@@ -55,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
         mTabLayout.setupWithViewPager(mViewPager);
-        setupTabIcons();
+        //setupTabIcons();
 
         /*final CollapsingToolbarLayout collapsingToolbarLayout =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
@@ -79,7 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
                 handleAlphaOnTitle(percentage);
                 handleToolbarTitleVisibility(percentage);
                 collapsingToolbarLayout.setTitleEnabled(mIsTheTitleVisible);
-                collapsingToolbarLayout.setTitle(mIsTheTitleVisible ? ProfileManager.getInstance().getProfileName() : "");
+                collapsingToolbarLayout.setTitle(mIsTheTitleVisible ? ProfileContext.getInstance().getProfileName() : "");
             }
         });
     }
@@ -91,8 +91,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void initProfileInfo() {
-        tvProfileName.setText(ProfileManager.getInstance().getProfileName());
-        tvCompanyName.setText(ProfileManager.getInstance().getCompanyName());
+        tvProfileName.setText(ProfileContext.getInstance().getProfileName());
+        tvCompanyName.setText(ProfileContext.getInstance().getCompanyName());
     }
 
     private void handleToolbarTitleVisibility(float percentage) {
@@ -185,8 +185,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return null;
-            //return mFragmentTitleList.get(position);
+            return mFragmentTitleList.get(position);
         }
     }
 }

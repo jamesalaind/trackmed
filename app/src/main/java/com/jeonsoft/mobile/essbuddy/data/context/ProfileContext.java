@@ -1,19 +1,19 @@
-package com.jeonsoft.mobile.essbuddy.data;
+package com.jeonsoft.mobile.essbuddy.data.context;
 
 /**
  * Created by whizk on 07/01/2016.
  */
-public final class ProfileManager {
-    private static ProfileManager instance;
+public final class ProfileContext {
+    private static ProfileContext instance;
 
-    private ProfileManager() {
+    private ProfileContext() {
         this.profileName = "Wendell Wayne H. Estrada";
         this.companyName = "JeonSoft Corporation";
     }
 
-    public static ProfileManager getInstance() {
+    public static ProfileContext getInstance() {
         if (instance == null)
-            instance = new ProfileManager();
+            instance = new ProfileContext();
         return instance;
     }
 

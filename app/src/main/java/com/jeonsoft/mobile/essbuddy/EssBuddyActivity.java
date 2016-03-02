@@ -1,9 +1,9 @@
 package com.jeonsoft.mobile.essbuddy;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,10 +16,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.jeonsoft.mobile.essbuddy.data.ProfileManager;
-import com.jeonsoft.mobile.essbuddy.networking.HttpRequest;
+import com.jeonsoft.mobile.essbuddy.data.context.ProfileContext;
 import com.jeonsoft.mobile.essbuddy.networking.HttpResponse;
+import com.jeonsoft.mobile.essbuddy.utils.AsyncHttpRequest;
+import com.jeonsoft.mobile.essbuddy.utils.AsyncHttpRequestListener;
 
 public class EssBuddyActivity extends BaseCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,10 +38,26 @@ public class EssBuddyActivity extends BaseCompatActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-                new ConnectAsync().execute(new String[] { "http://10.0.0.82:3000/api/employees", "POST" });
+            public void onClick(final View view) {
+                AsyncHttpRequest request = new AsyncHttpRequest("http://10.0.0.82:3000/api/employees/32", "GET", new AsyncHttpRequestListener() {
+                    @Override
+                    public void complete(HttpResponse response) {
+                        Snackbar.make(view, response.getResponseCode() + ": " + response.getResponseMessage(), Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+
+                    @Override
+                    public void failure(HttpResponse response, String message) {
+                        Snackbar.make(view, response != null ? response.getResponseCode() + ": " : "" + message, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+
+                    @Override
+                    public void request() {
+                        Toast.makeText(EssBuddyActivity.this, "Fetching employee list.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                request.execute();
             }
         });
 
@@ -58,35 +76,9 @@ public class EssBuddyActivity extends BaseCompatActivity
         tvProfileName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvProfileName);
     }
 
-    class ConnectAsync extends AsyncTask<String, Void, HttpResponse> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            logE("Connecting...please wait.");
-        }
-
-        @Override
-        protected void onPostExecute(HttpResponse integer) {
-            super.onPostExecute(integer);
-            logE(integer.toString());
-        }
-
-        @Override
-        protected HttpResponse doInBackground(String... params) {
-            HttpRequest request = new HttpRequest(params[0], params[1]);
-            try {
-                HttpResponse response = request.submitRequest();
-                return response;
-            } catch (Exception ex) {
-                logE(ex.getMessage());
-            }
-            return null;
-        }
-    }
-
     private void initProfileInfo() {
-        tvProfileName.setText(ProfileManager.getInstance().getProfileName());
-        tvCompanyName.setText(ProfileManager.getInstance().getCompanyName());
+        tvProfileName.setText(ProfileContext.getInstance().getProfileName());
+        tvCompanyName.setText(ProfileContext.getInstance().getCompanyName());
     }
 
     @Override
