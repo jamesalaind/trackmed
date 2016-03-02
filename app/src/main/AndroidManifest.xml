@@ -27,6 +27,11 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".EssBuddyActivity"
             android:label="Profile"/>
+
+        <activity android:name=".navactivities.SettingsActivity"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".EssBuddyActivity"
+            android:label="Settings" />
     </application>
 
 </manifest>

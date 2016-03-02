@@ -150,39 +150,55 @@ public class EssBuddyActivity extends BaseCompatActivity
         }
         name = name.replaceAll(" ", "");
 
-        try {
-            Class<?> cls = Class.forName(getPackageName().concat(".navfragments.").concat(name.concat("Fragment")));
-            Fragment fragment = (Fragment) cls.getConstructor().newInstance();
-            if (fragment instanceof BaseFragment) {
-                if(((BaseFragment) fragment).isShowFloatingActionButton())
+        /*
+        If item is checkable, the content is a fragment and will be displayed in the main content layout.
+        Otherwise, the content is an intent or activity that can be launched separately.
+        */
+        if (item.isCheckable()) {
+            try {
+                Class<?> cls = Class.forName(getPackageName().concat(".navfragments.").concat(name.concat("Fragment")));
+                Fragment fragment = (Fragment) cls.getConstructor().newInstance();
+                if (fragment instanceof BaseFragment) {
+                    if (((BaseFragment) fragment).isShowFloatingActionButton())
+                        fab.show();
+                    else
+                        fab.hide();
+                } else {
                     fab.show();
-                else
-                    fab.hide();
-            } else {
-                fab.show();
-            }
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.fragment_container, fragment);
-            ft.commit();
-        } catch (ClassNotFoundException ex) {
-            Fragment fragment = new MissingPageFragment();
-            if (fragment instanceof BaseFragment) {
-                if(((BaseFragment) fragment).isShowFloatingActionButton())
+                }
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.fragment_container, fragment);
+                ft.commit();
+            } catch (ClassNotFoundException ex) {
+                Fragment fragment = new MissingPageFragment();
+                if (fragment instanceof BaseFragment) {
+                    if (((BaseFragment) fragment).isShowFloatingActionButton())
+                        fab.show();
+                    else
+                        fab.hide();
+                } else {
                     fab.show();
-                else
-                    fab.hide();
-            } else {
-                fab.show();
+                }
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.fragment_container, fragment);
+                ft.commit();
+            } catch (NoSuchMethodException ex) {
+                logE("No such method. " + ex.getMessage());
+            } catch (Exception ex) {
+                logE(ex.getMessage());
             }
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.fragment_container, fragment);
-            ft.commit();
-        } catch (NoSuchMethodException ex) {
-            logE("No such method. " + ex.getMessage());
-        } catch (Exception ex) {
-            logE(ex.getMessage());
+        } else {
+            try {
+                Class<?> cls = Class.forName(getPackageName().concat(".navactivities.").concat(name.concat("Activity")));
+                Intent intent = new Intent(this, cls);
+                startActivity(intent);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (Exception ex) {
+                logE(ex.getMessage());
+            }
         }
     }
 }

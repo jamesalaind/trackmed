@@ -16,7 +16,7 @@
             android:layout_width="128dp"
             android:layout_height="128dp" />
         <TextView
-            android:text="Aw, snap!"
+            android:text="Oh, geez!"
             android:gravity="center"
             android:layout_gravity="center"
             android:textSize="28sp"
