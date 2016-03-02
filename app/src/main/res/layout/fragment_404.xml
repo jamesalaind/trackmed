@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:padding="16pt"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <ImageView
+            android:src="@drawable/ic_404"
+            android:layout_gravity="center"
+            android:layout_width="128dp"
+            android:layout_height="128dp" />
+        <TextView
+            android:text="Aw, snap!"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="28sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="16sp"
+            android:gravity="center"
+            android:text="Our developers are still working on this. Please come back to this page later."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

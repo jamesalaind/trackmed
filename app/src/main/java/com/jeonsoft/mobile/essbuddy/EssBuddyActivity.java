@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jeonsoft.mobile.essbuddy.data.context.ProfileContext;
+import com.jeonsoft.mobile.essbuddy.navfragments.MissingPageFragment;
 import com.jeonsoft.mobile.essbuddy.networking.HttpResponse;
 import com.jeonsoft.mobile.essbuddy.utils.AsyncHttpRequest;
 import com.jeonsoft.mobile.essbuddy.utils.AsyncHttpRequestListener;
@@ -141,10 +142,19 @@ public class EssBuddyActivity extends BaseCompatActivity
     }
 
     private void setNavigationContent(MenuItem item) {
-        String name = item.getTitleCondensed().toString();
+        String name = item.getTitleCondensed().toString().trim();
+        if (name.equals("")) {
+            name = item.getTitle().toString().trim();
+        }
+        name = name.replaceAll(" ", "");
         try {
             Class<?> cls = Class.forName(getPackageName().concat(".navfragments.").concat(name.concat("Fragment")));
-            Fragment fragment = (Fragment) cls.getConstructor().newInstance();
+            Fragment fragment;
+
+            if (cls == null)
+                fragment = new MissingPageFragment();
+            else
+                fragment = (Fragment) cls.getConstructor().newInstance();
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragment_container, fragment);
