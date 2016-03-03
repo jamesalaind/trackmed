@@ -29,6 +29,10 @@
             android:id="@+id/nav_subordinates"
             android:icon="@drawable/ic_menu_share"
             android:title="Subordinates"/>
+        <item
+            android:id="@+id/nav_projects"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Projects"/>
     </group>
 
     <item android:title="Timekeeping">
