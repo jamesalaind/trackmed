@@ -35,7 +35,12 @@ public class HomeFragment extends BaseFragment {
             }
         });
         tracker.connect();
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        tracker.disconnect();
     }
 
     @Nullable
