@@ -42,25 +42,7 @@ public class EssBuddyActivity extends BaseCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                AsyncHttpRequest request = new AsyncHttpRequest("http://10.0.0.82:3000/api/employees/32", "GET", new AsyncHttpRequestListener() {
-                    @Override
-                    public void complete(HttpResponse response) {
-                        Snackbar.make(view, response.getResponseCode() + ": " + response.getResponseMessage(), Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                    }
 
-                    @Override
-                    public void failure(HttpResponse response, String message) {
-                        Snackbar.make(view, response != null ? response.getResponseCode() + ": " : "" + message, Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                    }
-
-                    @Override
-                    public void request() {
-                        Toast.makeText(EssBuddyActivity.this, "Fetching employee list.", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                request.execute();
             }
         });
 
