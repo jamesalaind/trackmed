@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.dd.CircularProgressButton;
 import com.whiz.mobile.trackmed.R;
 import com.whiz.mobile.trackmed.location.LocationTracker;
 import com.whiz.mobile.trackmed.utils.Delayer;
@@ -19,11 +20,15 @@ import com.whiz.mobile.trackmed.utils.Delayer;
 public class HomeFragment extends BaseFragment {
     private LocationTracker tracker;
     private TextView tvHello;
+    private CircularProgressButton cpb;
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tvHello = ((TextView) view.findViewById(R.id.tvHello));
+        cpb = (CircularProgressButton) view.findViewById(R.id.btnWithText);
+        cpb.setIndeterminateProgressMode(true); // turn on indeterminate progress
+        cpb.setProgress(50);
     }
 
     @Override
@@ -38,28 +43,8 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        Delayer.delay(1, new Delayer.DelayCallback() {
-            @Override
-            public void afterDelay() {
-                tracker = new LocationTracker(getActivity(), new LocationTracker.LocationTrackerCallbacks() {
-                    @Override
-                    public void onLocationTrackerStatusChange(LocationTracker.LocationTrackerStatus status) {
-                        if (status == LocationTracker.LocationTrackerStatus.Connected) {
-                            double latitude = tracker.getLongitude();
-                            double longitude = tracker.getLatitude();
-                            final String msg = status.toString() + ", coord: (" +
-                                    String.valueOf(latitude) + ", " +
-                                    String.valueOf(longitude) + ") -> " +
-                                    tracker.getAddress();
-                            tvHello.setText(msg);
-                        }
-                    }
-                });
-                new GetLocationAsync().execute();
-            }
-        });
+    public void onReady() {
+        new GetLocationAsync().execute();
     }
 
     class GetLocationAsync extends AsyncTask<String, String, String> {
@@ -71,6 +56,32 @@ public class HomeFragment extends BaseFragment {
 
         @Override
         protected String doInBackground(String... params) {
+            tracker = new LocationTracker(getActivity(), new LocationTracker.LocationTrackerCallbacks() {
+                @Override
+                public void onLocationTrackerStatusChange(final LocationTracker.LocationTrackerStatus status) {
+                    if (status == LocationTracker.LocationTrackerStatus.Connected) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                double latitude = tracker.getLongitude();
+                                double longitude = tracker.getLatitude();
+                                final String msg = status.toString() + ", coord: (" +
+                                        String.valueOf(latitude) + ", " +
+                                        String.valueOf(longitude) + ") -> " +
+                                        tracker.getAddress();
+                                if (tracker != null) {
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            tvHello.setText(msg);
+                                        }
+                                    });
+                                }
+                            }
+                        }).start();
+                    }
+                }
+            });
             tracker.connect();
             return "";
         }
