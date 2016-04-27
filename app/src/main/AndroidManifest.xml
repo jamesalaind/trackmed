@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".EssBuddyActivity"
+            android:name=".MedRepTracker"
             android:label="@string/title_activity_ess_buddy_main"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -27,12 +27,12 @@
 
         <activity android:name=".ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".EssBuddyActivity"
+            android:parentActivityName=".MedRepTracker"
             android:label="Profile"/>
 
         <activity android:name=".navactivities.SettingsActivity"
             android:theme="@style/AppTheme"
-            android:parentActivityName=".EssBuddyActivity"
+            android:parentActivityName=".MedRepTracker"
             android:label="Settings" />
     </application>
 
