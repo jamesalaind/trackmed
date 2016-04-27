@@ -46,13 +46,15 @@ public class HomeFragment extends BaseFragment {
                 tracker = new LocationTracker(getActivity(), new LocationTracker.LocationTrackerCallbacks() {
                     @Override
                     public void onLocationTrackerStatusChange(LocationTracker.LocationTrackerStatus status) {
-                        double latitude = tracker.getLongitude();
-                        double longitude = tracker.getLatitude();
-                        String msg = status.toString() + ", coord: (" +
-                                String.valueOf(latitude) + ", " +
-                                String.valueOf(longitude) + ") -> " +
-                                tracker.getAddress();
-                        tvHello.setText(msg);
+                        if (status == LocationTracker.LocationTrackerStatus.Connected) {
+                            double latitude = tracker.getLongitude();
+                            double longitude = tracker.getLatitude();
+                            final String msg = status.toString() + ", coord: (" +
+                                    String.valueOf(latitude) + ", " +
+                                    String.valueOf(longitude) + ") -> " +
+                                    tracker.getAddress();
+                            tvHello.setText(msg);
+                        }
                     }
                 });
                 new GetLocationAsync().execute();
