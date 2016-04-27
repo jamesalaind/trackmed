@@ -29,7 +29,12 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onStop() {
         super.onStop();
-        tracker.disconnect();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                tracker.disconnect();
+            }
+        }).start();
     }
 
     @Override
