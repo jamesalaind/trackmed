@@ -1,5 +1,6 @@
 package com.whiz.mobile.trackmed.navfragments;
 
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dd.CircularProgressButton;
+import com.google.android.gms.maps.model.LatLng;
 import com.whiz.mobile.trackmed.R;
 import com.whiz.mobile.trackmed.location.LocationTracker;
 import com.whiz.mobile.trackmed.utils.Delayer;
@@ -80,6 +83,13 @@ public class HomeFragment extends BaseFragment {
                             }
                         }).start();
                     }
+                }
+            }, new LocationTracker.OnLocationTrackChange() {
+                @Override
+                public void onAddMarker(LatLng coord, Location location) {
+                    Toast.makeText(getActivity(), "Tracked new location: " +
+                                    String.valueOf(coord.latitude) + "," + String.valueOf(coord.longitude),
+                            Toast.LENGTH_SHORT).show();
                 }
             });
             tracker.connect();
