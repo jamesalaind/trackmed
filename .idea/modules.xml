@@ -4,6 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MedRepTracker.iml" filepath="$PROJECT_DIR$/MedRepTracker.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+<<<<<<< 8f2010e174a866303d4b943bc45e8867b73066d2
+      <module fileurl="file://$PROJECT_DIR$/trackmed.iml" filepath="$PROJECT_DIR$/trackmed.iml" />
+=======
+>>>>>>> Design (Initial)
     </modules>
   </component>
 </project>

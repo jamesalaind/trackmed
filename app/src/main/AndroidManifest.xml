@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jeonsoft.mobile.essbuddy">
+    package="com.whiz.mobile.trackmed">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+<<<<<<< 8f2010e174a866303d4b943bc45e8867b73066d2
+            android:name=".TrackMedActivity"
+=======
             android:name=".MedRepTracker"
+>>>>>>> Design (Initial)
             android:label="@string/title_activity_ess_buddy_main"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -25,14 +29,22 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ProfileActivity"
+        <activity android:name="com.whiz.mobile.trackmed.ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"
+<<<<<<< 8f2010e174a866303d4b943bc45e8867b73066d2
+            android:parentActivityName=".TrackMedActivity"
+=======
             android:parentActivityName=".MedRepTracker"
+>>>>>>> Design (Initial)
             android:label="Profile"/>
 
-        <activity android:name=".navactivities.SettingsActivity"
+        <activity android:name="com.whiz.mobile.trackmed.navactivities.SettingsActivity"
             android:theme="@style/AppTheme"
+<<<<<<< 8f2010e174a866303d4b943bc45e8867b73066d2
+            android:parentActivityName=".TrackMedActivity"
+=======
             android:parentActivityName=".MedRepTracker"
+>>>>>>> Design (Initial)
             android:label="Settings" />
     </application>
 

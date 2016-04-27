@@ -1,0 +1,64 @@
+{
+  "project_info": {
+    "project_id": "trackmed-1294",
+    "project_number": "1032140503624",
+    "name": "TrackMed"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032140503624:android:890be4b0887e3181",
+        "client_id": "android:com.whiz.mobile.trackmed",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.whiz.mobile.trackmed",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032140503624-bv2trl64e5ekq884f0e5u06e18s98h0p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.whiz.mobile.trackmed",
+            "certificate_hash": "321E2F585340DFAE3C1E7BFAF75C9A22A2BCA6C4"
+          }
+        },
+        {
+          "client_id": "1032140503624-tj8v66lmgt6ri780c7noikcvlesg7lsg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.whiz.mobile.trackmed",
+            "certificate_hash": "A1B5EF3779D9134FDACBCDD57408A553CAE04B44"
+          }
+        },
+        {
+          "client_id": "1032140503624-rs6o85hqm9mdtbuqfaa1h36rulpuc5kr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
