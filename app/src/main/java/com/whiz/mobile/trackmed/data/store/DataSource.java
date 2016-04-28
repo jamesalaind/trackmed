@@ -14,9 +14,9 @@ import java.util.List;
 /**
  * Created by WEstrada on 4/28/2016.
  */
-public class DataSource<T> {
-    private Context context;
-    private SqliteTable table;
+public abstract class DataSource<T> {
+    protected Context context;
+    protected SqliteTable<T> table;
     protected DatabaseManager DM = DatabaseManager.getInstance();
 
     public DataSource(Context context, SqliteTable table) {
@@ -40,12 +40,10 @@ public class DataSource<T> {
         Cursor cursor = DM.getDatabase().query(table.getName(), table.getFieldsArray(), null, null, null, null, null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()) {
-            T t =
+            T t = table.getEntityFromCursor(cursor);
+            list.add(t);
+            cursor.moveToNext();
         }
         return list;
-    }
-
-    public T mapCursor(Method method, Cursor cursor) {
-        method.invoke()
     }
 }

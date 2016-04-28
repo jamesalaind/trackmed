@@ -1,5 +1,6 @@
 package com.whiz.mobile.trackmed.data.schema;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.whiz.mobile.trackmed.data.SqliteHelper;
@@ -137,7 +138,5 @@ public abstract class SqliteTable<T> {
         return sql;
     }
 
-    public T getMappedEntity() {
-        return T;
-    }
+    public abstract T getEntityFromCursor(Cursor cursor);
 }
