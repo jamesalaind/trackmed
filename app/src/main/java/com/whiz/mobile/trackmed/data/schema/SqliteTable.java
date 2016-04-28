@@ -12,9 +12,25 @@ import java.util.Set;
 /**
  * Created by WEstrada on 4/28/2016.
  */
-public abstract class SqliteTable {
+public abstract class SqliteTable<T> {
     private String name;
     private HashMap<String, SqliteField> fields;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public HashMap<String, SqliteField> getFields() {
+        return fields;
+    }
+
+    public void setFields(HashMap<String, SqliteField> fields) {
+        this.fields = fields;
+    }
 
     public SqliteTable(String name) {
         this.name = name;
@@ -92,6 +108,19 @@ public abstract class SqliteTable {
         return sb.toString();
     }
 
+    public String[] getFieldsArray() {
+        String[] s = new String[fields.size()];
+        Set set = fields.entrySet();
+        Iterator i = set.iterator();
+        int c = 0;
+        while(i.hasNext()) {
+            Map.Entry me = (Map.Entry) i.next();
+            SqliteField field = (SqliteField) me.getKey();
+            s[c++] = field.getName();
+        }
+        return s;
+    }
+
     public String generateDropScript() {
         return "DROP TABLE IF EXISTS " + name;
     }
@@ -106,5 +135,9 @@ public abstract class SqliteTable {
         String sql = generateDropScript();
         db.execSQL(sql);
         return sql;
+    }
+
+    public T getMappedEntity() {
+        return T;
     }
 }
