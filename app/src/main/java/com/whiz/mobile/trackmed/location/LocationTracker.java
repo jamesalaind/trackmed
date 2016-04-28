@@ -5,8 +5,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -157,9 +159,22 @@ public class LocationTracker implements GoogleApiClient.ConnectionCallbacks,
                 googleApiClient, locationRequest, this);
     }
 
+    public static String getProviderName(LocationManager locationManager) {
+        Criteria criteria = new Criteria();
+        criteria.setPowerRequirement(Criteria.POWER_LOW);
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setSpeedRequired(true);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setCostAllowed(false);
+        return locationManager.getBestProvider(criteria, true);
+    }
+
     private void stopLocationUpdates() {
-        LocationServices.FusedLocationApi.removeLocationUpdates(
-                googleApiClient, this);
+        if (googleApiClient.isConnected()) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(
+                    googleApiClient, this);
+        }
     }
 
     public static boolean isGooglePlayServicesAvailable(Context context) {
