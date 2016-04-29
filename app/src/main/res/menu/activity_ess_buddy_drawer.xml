@@ -9,55 +9,34 @@
             android:titleCondensed="Home"
             android:title="Home" />
         <item
-            android:id="@+id/nav_filings"
+            android:id="@+id/nav_itinerary"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Filings" />
+            android:title="Itinerary" />
         <item
-            android:id="@+id/nav_schedules"
+            android:id="@+id/nav_tasks"
             android:icon="@drawable/ic_menu_slideshow"
-            android:titleCondensed="WorkSchedules"
-            android:title="Work Schedules" />
+            android:titleCondensed="Tasks"
+            android:title="Tasks" />
         <item
-            android:id="@+id/nav_leaves"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Leaves" />
-        <item
-            android:id="@+id/nav_payroll"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Payroll" />
-        <item
-            android:id="@+id/nav_subordinates"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Subordinates"/>
-        <item
-            android:id="@+id/nav_projects"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Projects"/>
+            android:id="@+id/nav_timelog"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:titleCondensed="Timelog"
+            android:title="Timelog" />
     </group>
 
-    <item android:title="Timekeeping">
+    <item android:title="Tools">
         <menu>
             <item
                 android:checkable="true"
-                android:id="@+id/nav_dtr"
+                android:id="@+id/nav_detailer"
                 android:icon="@drawable/ic_menu_share"
-                android:titleCondensed="DailyTimeRecords"
-                android:title="Daily time record" />
+                android:titleCondensed="Detailer"
+                android:title="Detailer" />
             <item
-                android:id="@+id/nav_timesheet"
+                android:id="@+id/nav_booking"
                 android:checkable="true"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Timesheet" />
-            <item
-                android:checkable="true"
-                android:id="@+id/nav_absences"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Absences" />
-            <item
-                android:checkable="true"
-                android:id="@+id/nav_tardy"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Tardy" />
+                android:title="Booking" />
         </menu>
     </item>
 
@@ -68,17 +47,12 @@
     <group android:id="@+id/nav_group_settings" android:checkableBehavior="single">
         <item
             android:checkable="false"
-            android:id="@+id/nav_notifications"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Notifications"/>
-        <item
-            android:checkable="false"
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_manage"
             android:title="Settings" />
         <item
             android:checkable="false"
-            android:id="@+id/nav_help_feedbak"
+            android:id="@+id/nav_help_feedback"
             android:icon="@drawable/ic_menu_send"
             android:title="Help and feedback" />
     </group>
